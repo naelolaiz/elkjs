@@ -242,6 +242,10 @@ def _dict_to_section(d: dict) -> ElkEdgeSection:
 
 
 def _dict_to_label(d: dict) -> ElkLabel:
+    labels = None
+    if "labels" in d and d["labels"] is not None:
+        labels = [_dict_to_label(lb) for lb in d["labels"]]
+
     return ElkLabel(
         id=d.get("id"),
         text=d.get("text"),
@@ -250,4 +254,5 @@ def _dict_to_label(d: dict) -> ElkLabel:
         width=d.get("width"),
         height=d.get("height"),
         layoutOptions=d.get("layoutOptions"),
+        labels=labels,
     )

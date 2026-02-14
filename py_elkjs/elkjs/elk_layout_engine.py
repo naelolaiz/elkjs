@@ -255,6 +255,8 @@ def _assign_layers(node_ids: List[str],
         # All nodes have outgoing edges (cycle); pick arbitrary start
         sinks = [node_ids[0]]
 
+    node_id_set = set(node_ids)
+
     def dfs(node: str) -> int:
         if node in layers:
             return layers[node]
@@ -263,7 +265,7 @@ def _assign_layers(node_ids: List[str],
         visited.add(node)
         max_pred_layer = -1
         for pred in rev_adj.get(node, []):
-            if pred in set(node_ids):
+            if pred in node_id_set:
                 pred_layer = dfs(pred)
                 max_pred_layer = max(max_pred_layer, pred_layer)
         layers[node] = max_pred_layer + 1
@@ -915,6 +917,13 @@ def _radial_layout(graph: dict, layout_options: dict,
 # SPOrE (Overlap Removal / Compaction) layout algorithms
 # ---------------------------------------------------------------------------
 
+def _rectangles_overlap(x1: float, y1: float, w1: float, h1: float,
+                        x2: float, y2: float, w2: float, h2: float,
+                        spacing: float) -> bool:
+    """Check if two rectangles overlap, accounting for required spacing."""
+    return (x1 < x2 + w2 + spacing and x1 + w1 + spacing > x2 and
+            y1 < y2 + h2 + spacing and y1 + h1 + spacing > y2)
+
 def _spore_overlap_layout(graph: dict, layout_options: dict,
                           options: dict) -> dict:
     """Simple overlap removal layout."""
@@ -949,9 +958,7 @@ def _spore_overlap_layout(graph: dict, layout_options: dict,
             ox = float(other.get("x", 0))
             oy = float(other.get("y", 0))
 
-            # Check if overlapping
-            if (cx < ox + ow + nn_spacing and cx + w + nn_spacing > ox and
-                    cy < oy + oh + nn_spacing and cy + h + nn_spacing > oy):
+            if _rectangles_overlap(cx, cy, w, h, ox, oy, ow, oh, nn_spacing):
                 # Move this node to avoid overlap
                 cx = ox + ow + nn_spacing
                 cy = oy + oh + nn_spacing
