@@ -1,11 +1,16 @@
-# elkjs – Python Port
+# elkjs – Python Wrapper
 
-A Python port of [elkjs](https://github.com/kieler/elkjs) providing automatic graph
+A Python wrapper for [elkjs](https://github.com/kieler/elkjs) providing automatic graph
 layout based on the [Eclipse Layout Kernel (ELK)](https://www.eclipse.org/elk/).
 Specialized for data flow diagrams and ports.
 
-This package provides a **100% equivalent** API to the JavaScript version
+This package provides an **API-equivalent** interface to the JavaScript version
 by communicating with the ELK layout engine via a Node.js subprocess bridge.
+
+> **Note:** This is a wrapper, not a pure Python port. The core layout
+> algorithms (106K+ lines of GWT-compiled JavaScript, originally from Java)
+> run in a Node.js subprocess. A true port would require rewriting the
+> entire ELK layout engine in Python.
 
 ## Requirements
 
@@ -87,7 +92,7 @@ pytest
 
 ## API Equivalence
 
-This Python port mirrors the JavaScript API:
+This Python wrapper mirrors the JavaScript API:
 
 | JavaScript                  | Python                        |
 |-----------------------------|-------------------------------|

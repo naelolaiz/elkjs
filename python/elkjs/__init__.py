@@ -1,6 +1,8 @@
 """elkjs – Eclipse Layout Kernel for Python.
 
-A Python port of elkjs providing automatic graph layout.
+A Python wrapper for elkjs providing automatic graph layout.
+The layout computation is performed by the ELK JavaScript engine
+via a Node.js subprocess bridge.
 
 Usage::
 

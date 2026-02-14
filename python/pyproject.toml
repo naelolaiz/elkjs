@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "elkjs"
 version = "0.11.0"
-description = "Python port of elkjs – Automatic graph layout based on the Eclipse Layout Kernel"
+description = "Python wrapper for elkjs – Automatic graph layout via the Eclipse Layout Kernel (requires Node.js)"
 readme = "README.md"
 license = {text = "EPL-2.0"}
 requires-python = ">=3.8"
