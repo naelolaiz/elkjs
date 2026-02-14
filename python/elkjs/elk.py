@@ -1,7 +1,9 @@
 """ELK - Eclipse Layout Kernel for Python.
 
 A Python port of elkjs providing automatic graph layout based on
-Sugiyama's algorithm. Specialized for data flow diagrams and ports.
+the Eclipse Layout Kernel (ELK). Supports multiple layout algorithms
+including layered (Sugiyama), stress, force, mrtree, radial, and more.
+Specialized for data flow diagrams and ports.
 
 This module communicates with the ELK layout engine via a Node.js
 subprocess using the compiled GWT JavaScript worker.

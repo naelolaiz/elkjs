@@ -8,8 +8,13 @@ from typing import Any, Dict, List, Optional, TypedDict, Union
 
 
 class LayoutOptions(TypedDict, total=False):
-    """Layout options as key-value string pairs."""
-    pass  # Any string key to string value
+    """Layout options as key-value string pairs.
+
+    In practice this is ``Dict[str, str]`` – the TypedDict wrapper is
+    provided for documentation purposes only.  Use ``Dict[str, str]``
+    directly for type annotations.
+    """
+    pass
 
 
 class ElkPoint(TypedDict):
