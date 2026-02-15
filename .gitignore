@@ -7,3 +7,10 @@ bin/
 *.sublime-*
 .project
 org.eclipse.buildship.core.prefs
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+*.egg
+.pytest_cache/
