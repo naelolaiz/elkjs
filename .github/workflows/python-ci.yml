@@ -1,0 +1,42 @@
+name: Python elkjs CI
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'py_elkjs/**'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'py_elkjs/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        cd py_elkjs
+        python -m pip install --upgrade pip
+        pip install pytest
+        pip install -e .
+
+    - name: Run tests
+      run: |
+        cd py_elkjs
+        python -m pytest tests/ -v
